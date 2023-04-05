@@ -9,12 +9,49 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let gameStore = GameStore()
+    @ObservedObject var gameStore = GameStore() //gamestore bir sinyal alırsa bu arayüz kendidini yeniden çizmiş olacak
+    @State var gameToDelete :Game?
     
     var body: some View {
-        List(gameStore.games) { (game) in
-            GameListItem(game: game)
+        NavigationView{
+            List{
+                ForEach(gameStore.games) { (game) in
+                    NavigationLink(destination:Text(game.name)){
+                        GameListItem(game: game)
+                    }
+                }
+                .onDelete(perform: { indexSet in gameStore.delete(at: indexSet)
+                    self.gameToDelete = gameStore.game(at: indexSet)
+                    
+                })
+                .onMove(perform: { indices,
+                    newOffset in
+                    gameStore.move(indices: indices, to: newOffset)
+                })
+            }
+            .listStyle(.plain) //bunu yapmayınca listenşn arkası daha soluk oluyor liste belli oluyor.
+            .navigationTitle("USED GAMES")
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing: Button(action:{
+                    gameStore.createGames()
+            },label:{
+                Text("Add")
+            }))
+            .animation(.easeIn(duration: 2),value: UUID())
+            .actionSheet(item: $gameToDelete) { (game)
+                -> ActionSheet in
+                ActionSheet(title: Text("Are you sure?"), message: Text("You will delete  \(game.name)") , buttons: [
+                    .cancel(),.destructive(Text("Delete"), action: {
+                        if let indexSet = gameStore.indexSet(for: game){
+                            gameStore.delete(at: indexSet)
+                        }
+                    })
+                    
+                ])
+            }
         }
+        .accentColor(.purple)
     }
 }
 
@@ -24,25 +61,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-
-struct GameListItem: View {
-    var game :Game
-    var numberFormatter: NumberFormatter = Formatters.dollarformatter
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4.0) {
-                Text(game.name)
-                    .font(.body)
-                Text(game.serialNumber)
-                    .font(.caption)
-                    .foregroundColor(Color(white:0.65))
-            }
-            Spacer()
-            Text(NSNumber(value: game.priceInDollars), formatter: numberFormatter)
-                .font(.title2)
-                .foregroundColor(game.priceInDollars > 30 ?.blue : .gray)
-        }
-        .padding(.vertical,6)
-    }
-}

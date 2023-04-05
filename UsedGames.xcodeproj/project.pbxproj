@@ -17,6 +17,9 @@
 		236B72E729DC33D8009852C6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B72E629DC33D8009852C6 /* Game.swift */; };
 		236B72E929DC39F8009852C6 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B72E829DC39F8009852C6 /* GameStore.swift */; };
 		236B72ED29DC4B80009852C6 /* UsedGames+Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B72EC29DC4B80009852C6 /* UsedGames+Formatters.swift */; };
+		236B72F129DD8325009852C6 /* Color+UsedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B72F029DD8325009852C6 /* Color+UsedGames.swift */; };
+		236B72F329DD84BD009852C6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 236B72F229DD84BD009852C6 /* Colors.xcassets */; };
+		236B72F529DD8962009852C6 /* GameListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B72F429DD8962009852C6 /* GameListItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		236B72E629DC33D8009852C6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		236B72E829DC39F8009852C6 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		236B72EC29DC4B80009852C6 /* UsedGames+Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsedGames+Formatters.swift"; sourceTree = "<group>"; };
+		236B72F029DD8325009852C6 /* Color+UsedGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UsedGames.swift"; sourceTree = "<group>"; };
+		236B72F229DD84BD009852C6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		236B72F429DD8962009852C6 /* GameListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +108,12 @@
 			children = (
 				236B72BC29DC2B92009852C6 /* UsedGamesApp.swift */,
 				236B72BE29DC2B92009852C6 /* ContentView.swift */,
+				236B72F429DD8962009852C6 /* GameListItem.swift */,
 				236B72EC29DC4B80009852C6 /* UsedGames+Formatters.swift */,
 				236B72E629DC33D8009852C6 /* Game.swift */,
 				236B72E829DC39F8009852C6 /* GameStore.swift */,
 				236B72C029DC2B94009852C6 /* Assets.xcassets */,
+				236B72F229DD84BD009852C6 /* Colors.xcassets */,
 				236B72C229DC2B94009852C6 /* Preview Content */,
 			);
 			path = UsedGames;
@@ -114,6 +122,7 @@
 		236B72C229DC2B94009852C6 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				236B72F029DD8325009852C6 /* Color+UsedGames.swift */,
 				236B72C329DC2B94009852C6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -240,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236B72F329DD84BD009852C6 /* Colors.xcassets in Resources */,
 				236B72C429DC2B94009852C6 /* Preview Assets.xcassets in Resources */,
 				236B72C129DC2B94009852C6 /* Assets.xcassets in Resources */,
 			);
@@ -268,6 +278,8 @@
 			files = (
 				236B72BF29DC2B92009852C6 /* ContentView.swift in Sources */,
 				236B72ED29DC4B80009852C6 /* UsedGames+Formatters.swift in Sources */,
+				236B72F529DD8962009852C6 /* GameListItem.swift in Sources */,
+				236B72F129DD8325009852C6 /* Color+UsedGames.swift in Sources */,
 				236B72E929DC39F8009852C6 /* GameStore.swift in Sources */,
 				236B72E729DC33D8009852C6 /* Game.swift in Sources */,
 				236B72BD29DC2B92009852C6 /* UsedGamesApp.swift in Sources */,
