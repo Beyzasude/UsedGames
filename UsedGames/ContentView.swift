@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var gameToDelete :Game?
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             List{
                 ForEach(gameStore.games) { (game) in
                     NavigationLink(destination:DetailView(game:game, gameStore: gameStore, name: game.name, price: game.priceInDollars)){

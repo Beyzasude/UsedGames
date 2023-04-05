@@ -5,13 +5,30 @@
 //  Created by Beyza Sude Erol on 4.04.2023.
 //
 
-import Foundation
+import UIKit
 
 class GameStore: ObservableObject {
     
     @Published var games: [Game] = [] // ne zaman bir obje değiştiğinde arayüzün değişmesini istersek published çağırılır
     
-    init() {}
+    init() {
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(saveChanges),
+            name: UIApplication.willTerminateNotification,
+            object: nil
+        )
+        do {
+            let data = try Data(contentsOf: gameFileURL)
+            let decoder = PropertyListDecoder()
+            let games = try decoder.decode([Game].self, from: data)
+            
+            self.games = games
+        } catch  {
+            print(error)
+        }
+        
+    }
     
     @discardableResult func createGames() -> Game{
         let game = Game(random: true)
@@ -48,5 +65,26 @@ class GameStore: ObservableObject {
         }
     }
     
+    @objc func saveChanges() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(games)
+            do {
+                try  data.write(to: gameFileURL)
+                print(gameFileURL)
+            } catch  {
+                print("An error occured while saving to path: \(error.localizedDescription)")
+            }
+        } catch  {
+            print("An error occured while encoding: \(error.localizedDescription)")
+        }
+        
+    }
+    
+    let gameFileURL: URL = {
+        let documentDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = documentDirectories.first!
+        return documentDirectory.appendingPathComponent("games.plist")
+    }()
     
 }

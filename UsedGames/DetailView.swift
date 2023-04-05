@@ -4,7 +4,7 @@
 //
 //  Created by Beyza Sude Erol on 5.04.2023.
 //
-
+import UIKit
 import SwiftUI
 import Combine
 //just publisherı name her değiştiğinde bunu günceller ve bunun için combine framework improt ederiz.
@@ -16,6 +16,8 @@ struct DetailView: View {
     @State var name:String = ""
     @State var price:Double = 0.0
     @State var shouldDisableSaveButton: Bool = true
+    @State var isPhotoPickerPresenting: Bool = false
+    @State var selectedPhoto: UIImage?
     
     func validate(){
         shouldDisableSaveButton = game.name != name || game.priceInDollars != price
@@ -63,7 +65,19 @@ struct DetailView: View {
                 .disabled(!shouldDisableSaveButton)
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .bottomBar){
+                Button(action: {
+                    isPhotoPickerPresenting = true
+                } , label: {
+                    Image(systemName: "camera")
+                })
+            }
+        }
         .navigationBarTitleDisplayMode(.inline) //bunu verdik çünkü detay sayfasına gidince bir önceki sayfadaki bar kısmı olan yerin boşluğu burada da kalıyordu ve sayfa biraz aşağıdan başlıyordu.
+        .sheet(isPresented: $isPhotoPickerPresenting, content: {
+            PhotoPicker(selectedPhoto: $selectedPhoto)
+        })
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Game: NSObject, Identifiable {
+class Game: NSObject, Identifiable, Codable{
     
     var name: String
     var priceInDollars: Double
